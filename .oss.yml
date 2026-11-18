@@ -1,0 +1,5 @@
+# This repository is the public upstream. See AGENTS.md, "Public vs private".
+tier: public
+upstream: ""
+license: MIT
+deny_extra: []

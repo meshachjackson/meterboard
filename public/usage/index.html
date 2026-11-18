@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="color-scheme" content="light dark">
+    <title>AI usage</title>
+    <link rel="stylesheet" href="/usage/styles.css">
+    <script type="module" src="/usage/app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to the figures</a>
+    <header class="top">
+      <div>
+        <h1 id="title">AI usage</h1>
+        <p class="range" id="range">Loading the figures.</p>
+      </div>
+      <div class="actions" id="actions" hidden>
+        <button type="button" id="refresh" class="quiet">Refresh</button>
+        <a id="signout" class="quiet button" href="/usage/" hidden>Sign out</a>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+
+      <section id="signin" class="signin" hidden aria-labelledby="signin-h">
+        <h2 id="signin-h">Signed out</h2>
+        <p>This page is private. Your sign-in has ended or did not reach the page.</p>
+        <p id="signin-link-row"><a class="button" id="signin-link" href="/usage/">Sign in</a></p>
+        <form id="token-form" class="token-form" hidden>
+          <label for="token">Access token</label>
+          <input id="token" name="token" type="password" autocomplete="current-password" required>
+          <button type="submit">Open the dashboard</button>
+          <p class="tile-note">Kept in this tab only. Ask whoever runs this server for the token.</p>
+        </form>
+      </section>
+
+      <div id="dashboard" hidden>
+        <section class="headline" aria-labelledby="spent-h">
+          <div class="hero">
+            <h2 id="spent-h">Spent so far in <span id="month-name">this month</span></h2>
+            <p class="hero-figure" id="spent"></p>
+            <p class="hero-note">Subscriptions at their full monthly fee plus billed API and hosting spend. Before tax. Our own token counts carry no price and are not in dollars.</p>
+          </div>
+          <dl class="tiles">
+            <div class="tile">
+              <dt>Average per day</dt>
+              <dd class="tile-value" id="per-day"></dd>
+              <dd class="tile-note" id="per-day-note"></dd>
+            </div>
+            <div class="tile">
+              <dt>Projected month end</dt>
+              <dd class="tile-value" id="projected"></dd>
+              <dd class="tile-note" id="projected-note"></dd>
+            </div>
+            <div class="tile tile-trend" id="trend-tile">
+              <dt>Trend</dt>
+              <dd class="tile-value" id="trend"></dd>
+              <dd class="tile-note" id="trend-note"></dd>
+            </div>
+          </dl>
+          <figure class="pace" aria-labelledby="pace-cap">
+            <figcaption id="pace-cap" class="sr">Spend so far this month by kind, with the projected month end and a usual month marked.</figcaption>
+            <div class="pace-track" id="pace-track"></div>
+            <div class="pace-scale" id="pace-scale" aria-hidden="true"></div>
+            <ul class="legend" id="pace-legend"></ul>
+          </figure>
+        </section>
+
+        <section aria-labelledby="usual-h">
+          <h2 id="usual-h">A usual month</h2>
+          <p class="lede" id="usual-basis"></p>
+          <dl class="usual" id="usual"></dl>
+        </section>
+
+        <section aria-labelledby="cut-h">
+          <h2 id="cut-h">Where to cut</h2>
+          <p class="lede">Paid plans with no recorded use, spend on the dearest models, limits near their cap and spend running over trend. Largest first.</p>
+          <ul class="flags" id="flags"></ul>
+        </section>
+
+        <section aria-labelledby="daily-h">
+          <h2 id="daily-h">Tokens per day</h2>
+          <p class="lede">Tokens in and out by the day they were recorded, split by model. Days are when the tracker logged them, so a catch-up shows as one tall day.</p>
+          <div id="daily"></div>
+        </section>
+
+        <section aria-labelledby="platform-h">
+          <h2 id="platform-h">By platform</h2>
+          <p class="lede">Every account: what it costs, what it billed this month and the tokens it used. "Worth at API rates" is an estimate of what a plan's tokens would cost if paid per use, as a range because cached input is not split out. It is never added to the dollars above.</p>
+          <div id="platforms"></div>
+        </section>
+
+        <section aria-labelledby="models-h">
+          <h2 id="models-h">By model</h2>
+          <p class="lede">Share of tokens per model. Bills and our own count are kept apart and never added together.</p>
+          <div class="split" id="models"></div>
+        </section>
+
+        <section aria-labelledby="agents-h">
+          <h2 id="agents-h">By agent</h2>
+          <p class="lede">Tokens and spend for each agent this month. Run counts per agent are not in the usage data yet.</p>
+          <div class="split" id="agents"></div>
+        </section>
+
+        <section aria-labelledby="month-h">
+          <h2 id="month-h">By source</h2>
+          <p class="lede">From bills (what a provider charged) and our own count (tokens counted by our tools, often with no price). Kept apart, never added.</p>
+          <div class="ledgers" id="ledgers"></div>
+        </section>
+
+        <section aria-labelledby="limits-h">
+          <h2 id="limits-h">Limits</h2>
+          <p class="lede">The latest reading for each limit. The tick on each bar marks 80%, where a warning starts.</p>
+          <ul class="limits" id="limits"></ul>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
